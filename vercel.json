@@ -1,9 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/api/sms", "destination": "/api/data?type=sms" },
-    { "source": "/api/contacts", "destination": "/api/data?type=contacts" },
-    { "source": "/api/calls", "destination": "/api/data?type=calls" },
-    { "source": "/api/accounts", "destination": "/api/data?type=accounts" },
-    { "source": "/api/notifications", "destination": "/api/data?type=notifications" }
-  ]
-}
